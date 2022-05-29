@@ -56,3 +56,34 @@ const iPhone13ProMax = new Phone (
 
 console.log ("Phone: ", iPhone13ProMax);
 console.log ("How many days since you bought it from the release date: ", iPhone13ProMax.daysBoughtSinceRelease());
+
+// Creates a template literal for the HTML file
+const content = `
+<article>
+  <h1>Brand: ${caliburnPod.brand}</h1>
+  <ul>
+    <li>Type: ${caliburnPod.vapeType}</li>
+    <li>Tank: ${caliburnPod.tank}</li>
+    <li>Ohms: ${caliburnPod.cartridge.ohms} ohms</li>
+    <li>Wattage: ${caliburnPod.cartridge.wattage} watts</li>
+    <li>Juice Type: ${caliburnPod.juice.juiceType}</li>
+    <li>Nicotine MG: ${caliburnPod.juice.mg} mg</li>
+    <li>Date Bought: ${caliburnPod.dateAcquired}</li>
+  </ul>
+</article>
+<article>
+  <h1>Brand: ${iPhone13ProMax.brand}</h1>
+  <ul>
+    <li>OS: ${iPhone13ProMax.os}</li>
+    <li>Date Released: ${iPhone13ProMax.dateReleased}</li>
+    <li>Date Bought: ${iPhone13ProMax.dateAcquired}</li>
+    <li>Processor: ${iPhone13ProMax.specs.processor}</li>
+    <li>RAM: ${iPhone13ProMax.specs.RAM} GB</li>
+    <li>HDD: ${iPhone13ProMax.specs.HDD} GB</li>
+    <li>Number of Cameras: ${iPhone13ProMax.specs.cam.camNum}</li>
+    <li>Megapixels: ${iPhone13ProMax.specs.cam.camMP} MP</li>
+  </ul>
+</article>`
+;
+
+document.body.innerHTML = content; //injects the content literal to the HTML file
