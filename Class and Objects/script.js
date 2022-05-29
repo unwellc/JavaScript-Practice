@@ -8,9 +8,10 @@
  * - Test your objects in the browser console by accessing the entire object and its specific properties.
  */
 
-//Create and Define Vape object based from Vape class
+//Create and Define Vape and Phone object based from Vape and Phone class
 
 import Vape from "./vape.js";
+import Phone from "./phone.js";
 
 const caliburnPod = new Vape(
   "Caliburn",
@@ -31,6 +32,7 @@ const caliburnPod = new Vape(
 
 console.log("Vape", caliburnPod);
 console.log("Date acquired:", caliburnPod.dateAcquired);
+console.log("Days since acquired: ", caliburnPod.vapeAge());
 
 console.log("old juice: ", caliburnPod.juice.mg);
 caliburnPod.juiceContents(30);
@@ -39,3 +41,18 @@ console.log("new juice: ", caliburnPod.juice.mg);
 console.log("battery before vape usage: ", caliburnPod.HasBattery);
 caliburnPod.canVape(false);
 console.log("battery after usage: ", caliburnPod.HasBattery);
+
+const iPhone13ProMax = new Phone (
+  "iPhone",
+  "iOS",
+  "September 12, 2022",
+  "December 19, 2022",
+  "A15",
+  6,
+  256,
+  3,
+  12
+);
+
+console.log ("Phone: ", iPhone13ProMax);
+console.log ("How many days since you bought it from the release date: ", iPhone13ProMax.daysBoughtSinceRelease());
