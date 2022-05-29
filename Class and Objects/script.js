@@ -15,7 +15,8 @@ import Phone from "./phone.js";
 
 const caliburnPod = new Vape(
   "Caliburn",
-  "pod",
+  "Pod",
+  "Gun Metal",
   false,
   true,
   "Cartridge",
@@ -27,7 +28,8 @@ const caliburnPod = new Vape(
   40,
   "Salt Nic",
   true,
-  "May 1, 2022 15:00:00 PST"
+  "May 1, 2022 15:00:00 PST",
+  "../assets_other/images/uwell_caliburn_black_1604833997_f0b649c7.jpg"
 );
 
 console.log("Vape", caliburnPod);
@@ -42,8 +44,9 @@ console.log("battery before vape usage: ", caliburnPod.HasBattery);
 caliburnPod.canVape(false);
 console.log("battery after usage: ", caliburnPod.HasBattery);
 
-const iPhone13ProMax = new Phone (
+const iPhone13ProMax = new Phone(
   "iPhone",
+  "Blue",
   "iOS",
   "September 12, 2022",
   "December 19, 2022",
@@ -54,36 +57,55 @@ const iPhone13ProMax = new Phone (
   12
 );
 
-console.log ("Phone: ", iPhone13ProMax);
-console.log ("How many days since you bought it from the release date: ", iPhone13ProMax.daysBoughtSinceRelease());
+console.log("Phone: ", iPhone13ProMax);
+console.log(
+  "How many days since you bought it from the release date: ",
+  iPhone13ProMax.daysBoughtSinceRelease()
+);
 
-// Creates a template literal for the HTML file
 const content = `
-<article>
-  <h1>Brand: ${caliburnPod.brand}</h1>
-  <ul>
-    <li>Type: ${caliburnPod.vapeType}</li>
-    <li>Tank: ${caliburnPod.tank}</li>
-    <li>Ohms: ${caliburnPod.cartridge.ohms} ohms</li>
-    <li>Wattage: ${caliburnPod.cartridge.wattage} watts</li>
-    <li>Juice Type: ${caliburnPod.juice.juiceType}</li>
-    <li>Nicotine MG: ${caliburnPod.juice.mg} mg</li>
-    <li>Date Bought: ${caliburnPod.dateAcquired}</li>
-  </ul>
-</article>
-<article>
-  <h1>Brand: ${iPhone13ProMax.brand}</h1>
-  <ul>
-    <li>OS: ${iPhone13ProMax.os}</li>
-    <li>Date Released: ${iPhone13ProMax.dateReleased}</li>
-    <li>Date Bought: ${iPhone13ProMax.dateAcquired}</li>
-    <li>Processor: ${iPhone13ProMax.specs.processor}</li>
-    <li>RAM: ${iPhone13ProMax.specs.RAM} GB</li>
-    <li>HDD: ${iPhone13ProMax.specs.HDD} GB</li>
-    <li>Number of Cameras: ${iPhone13ProMax.specs.cam.camNum}</li>
-    <li>Megapixels: ${iPhone13ProMax.specs.cam.camMP} MP</li>
-  </ul>
-</article>`
-;
+    <figure class="vape_image">
+      <img src=${caliburnPod.image} alt="" />
+    </figure>
+    <h1 class="vape_brand">${caliburnPod.brand}</h1>
+    <ul class="vape_features">
+      <li class="vapeprop vape_type">Type: <span> ${
+        caliburnPod.vapeType
+      }</span></li>
+      <li class="vapeprop vape_color">Vape Color: <span> ${
+        caliburnPod.color
+      }</span></li>
+      <li class="vapeprop vape_tank">Tank: <span>${caliburnPod.tank}</span></li>
+      <li class="vapeprop vape_cartridge_ohms">Ohms: <span> ${
+        caliburnPod.cartridge.ohms
+      } ohms</span></li>
+      <li class="vapeprop vape_cartridge_wattage">Wattage: <span> ${
+        caliburnPod.cartridge.wattage
+      } watts</span></li>
+      <li class="vapeprop vape_juice_type">Juice Type: <span> ${
+        caliburnPod.juice.juiceType
+      }</span></li>
+      <li class="vapeprop vape_juice_mg">Nicotine: <span> ${
+        caliburnPod.juice.mg
+      } mg</span></li>
+      <li class="vape_age">Days since Acquired: <span> ${caliburnPod.vapeAge()} days old</span></li>
+    </ul>
+  </article>
+`;
 
-document.body.innerHTML = content; //injects the content literal to the HTML file
+//creates a variable targeting the existing element from HTML
+const main = document.querySelector(".maincontent");
+
+//creates a new element
+const newArticle = document.createElement("article");
+
+//add classes and attributes to article element
+newArticle.classList.add("vape");
+newArticle.setAttribute("id", "pod");
+
+//adds the content template literal to the newArticle element
+newArticle.innerHTML = content;
+
+/*adds the newArticle const containing the article element to the main
+element*/
+main.append(newArticle);
