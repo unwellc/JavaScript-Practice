@@ -103,7 +103,7 @@ const newArticle = document.createElement("article");
 newArticle.classList.add("vape");
 newArticle.setAttribute("id", "pod");
 
-//injects the article element to the html file
+//injects the content template literal to the newArticle element
 newArticle.innerHTML = content;
 
 /*adds the newArticle const containing the article element to the main
