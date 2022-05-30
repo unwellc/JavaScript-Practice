@@ -63,6 +63,15 @@ console.log(
   iPhone13ProMax.daysBoughtSinceRelease()
 );
 
+const simpleNav = `
+<ul class="simpleVapeNav">
+<li><a class="active" href="#home">Home</a></li>
+<li><a href="#news">News</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><a href="#about">About</a></li>
+</ul>
+`;
+
 const content = `
     <figure class="vape_image">
       <img src=${caliburnPod.image} alt="" />
@@ -93,19 +102,26 @@ const content = `
   </article>
 `;
 
-//creates a variable targeting the existing element from HTML
+//creates variables targeting the main and header elements from HTML
 const main = document.querySelector(".maincontent");
+const header = document.querySelector(".siteheader");
 
-//creates a new element
+//creates a new element for article and nav
 const newArticle = document.createElement("article");
+const headerNav = document.createElement("nav");
 
-//add classes and attributes to article element
+//add classes and attributes to article and nav element
 newArticle.classList.add("vape");
 newArticle.setAttribute("id", "pod");
+headerNav.classList.add("vape_nav");
+headerNav.setAttribute("id", "simplenav");
 
-//injects the content template literal to the newArticle element
+//adds the content template literal to the newArticle and nav element
 newArticle.innerHTML = content;
+headerNav.innerHTML = simpleNav;
 
-/*adds the newArticle const containing the article element to the main
-element*/
+/*adds the newArticle and nav 
+const containing the article element and nav element to the main
+and header element*/
 main.append(newArticle);
+header.append(headerNav);
