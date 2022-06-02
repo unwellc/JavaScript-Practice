@@ -63,65 +63,72 @@ console.log(
   iPhone13ProMax.daysBoughtSinceRelease()
 );
 
-const simpleNav = `
-<ul class="simpleVapeNav">
-<li><a class="active" href="#home">Home</a></li>
-<li><a href="#news">News</a></li>
-<li><a href="#contact">Contact</a></li>
-<li><a href="#about">About</a></li>
-</ul>
-`;
+// creates a constant function expression for the navigation menu
+const newNav = function () {
+  //creates a nav element
+  const headerNav = document.createElement("nav");
+  //add a class name for the nav element to reference the css script
+  headerNav.classList.add("vape_nav");
+  headerNav.setAttribute("id", "simplenav");
+  //add HTML contents to the nav element
+  headerNav.innerHTML = `
+    <ul class="simpleVapeNav">
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a></li>
+    </ul>
+    `;
+  return headerNav;
+};
 
-const content = `
+// create a constant function expression for printing vape contents
+const newVape = function (currentVape) {
+  //creates a new element for article
+  const newArticle = document.createElement("article");
+  //add classes and attributes to article element
+  newArticle.classList.add("vape");
+  newArticle.setAttribute("id", "pod");
+  //add HTML contents to the article element
+  newArticle.innerHTML = `
     <figure class="vape_image">
-      <img src=${caliburnPod.image} alt="" />
+      <img src=${currentVape.image} alt="" />
     </figure>
-    <h1 class="vape_brand">${caliburnPod.brand}</h1>
+    <h1 class="vape_brand">${currentVape.brand}</h1>
     <ul class="vape_features">
       <li class="vapeprop vape_type">Type: <span> ${
-        caliburnPod.vapeType
+        currentVape.vapeType
       }</span></li>
       <li class="vapeprop vape_color">Vape Color: <span> ${
-        caliburnPod.color
+        currentVape.color
       }</span></li>
       <li class="vapeprop vape_tank">Tank: <span>${caliburnPod.tank}</span></li>
       <li class="vapeprop vape_cartridge_ohms">Ohms: <span> ${
-        caliburnPod.cartridge.ohms
+        currentVape.cartridge.ohms
       } ohms</span></li>
       <li class="vapeprop vape_cartridge_wattage">Wattage: <span> ${
-        caliburnPod.cartridge.wattage
+        currentVape.cartridge.wattage
       } watts</span></li>
       <li class="vapeprop vape_juice_type">Juice Type: <span> ${
-        caliburnPod.juice.juiceType
+        currentVape.juice.juiceType
       }</span></li>
       <li class="vapeprop vape_juice_mg">Nicotine: <span> ${
-        caliburnPod.juice.mg
+        currentVape.juice.mg
       } mg</span></li>
       <li class="vape_age">Days since Acquired: <span> ${caliburnPod.vapeAge()} days old</span></li>
     </ul>
-  </article>
 `;
+  return newArticle;
+};
 
 //creates variables targeting the main and header elements from HTML
 const main = document.querySelector(".maincontent");
 const header = document.querySelector(".siteheader");
 
-//creates a new element for article and nav
-const newArticle = document.createElement("article");
-const headerNav = document.createElement("nav");
+/*invokes the main append function containing the newVape method
+with the object as a parameter*/
+main.append(newVape(caliburnPod));
 
-//add classes and attributes to article and nav element
-newArticle.classList.add("vape");
-newArticle.setAttribute("id", "pod");
-headerNav.classList.add("vape_nav");
-headerNav.setAttribute("id", "simplenav");
-
-//adds the content template literal to the newArticle and nav element
-newArticle.innerHTML = content;
-headerNav.innerHTML = simpleNav;
-
-/*adds the newArticle and nav 
-const containing the article element and nav element to the main
-and header element*/
-main.append(newArticle);
-header.append(headerNav);
+/* invoke the newNav function as a parameter of the const header
+append function */
+header.append(newNav());
