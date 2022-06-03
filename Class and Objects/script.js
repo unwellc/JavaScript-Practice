@@ -32,18 +32,6 @@ const caliburnPod = new Vape(
   "../assets_other/images/uwell_caliburn_black_1604833997_f0b649c7.jpg"
 );
 
-console.log("Vape", caliburnPod);
-console.log("Date acquired:", caliburnPod.dateAcquired);
-console.log("Days since acquired: ", caliburnPod.vapeAge());
-
-console.log("old juice: ", caliburnPod.juice.mg);
-caliburnPod.juiceContents(30);
-console.log("new juice: ", caliburnPod.juice.mg);
-
-console.log("battery before vape usage: ", caliburnPod.HasBattery);
-caliburnPod.canVape(false);
-console.log("battery after usage: ", caliburnPod.HasBattery);
-
 const iPhone13ProMax = new Phone(
   "iPhone",
   "Blue",
@@ -128,6 +116,9 @@ const newVape = (currentVape) => {
         currentVape.juice.mg
       } mg</span></li>
       <li class="vape_age">Days since Acquired: <span> ${currentVape.vapeAge()} days old</span></li>
+      <li class="vape_age">Battery Status: <span> ${
+        currentVape.HasBattery ? "Has Battery" : "Low Battery"
+      }</span></li>
     </ul>
 `;
   return newArticle;
