@@ -83,6 +83,17 @@ const newNav = () => {
   return headerNav;
 };
 
+//create a new function for figure element
+const newImage = (img) => {
+  const vapeImage = document.createElement("figure");
+  vapeImage.classList.add("vape_image");
+  vapeImage.innerHTML = `
+  <img src=${img} alt="" />
+  <figcaption><center> Caliburn Uwell A1 </center></figcaption>
+  </figure>`;
+  return vapeImage;
+};
+
 /* create a constant function expression for printing vape contents
 using arrow function */
 const newVape = (currentVape) => {
@@ -91,11 +102,10 @@ const newVape = (currentVape) => {
   //add classes and attributes to article element
   newArticle.classList.add("vape");
   newArticle.setAttribute("id", "pod");
-  //add HTML contents to the article element
-  newArticle.innerHTML = `
-    <figure class="vape_image">
-      <img src=${currentVape.image} alt="" />
-    </figure>
+  //appends the figure element to the article element
+  newArticle.append(newImage(currentVape.image));
+  //adds other HTML contents below using template literals
+  newArticle.innerHTML += `
     <h1 class="vape_brand">${currentVape.brand}</h1>
     <ul class="vape_features">
       <li class="vapeprop vape_type">Type: <span> ${
@@ -104,7 +114,7 @@ const newVape = (currentVape) => {
       <li class="vapeprop vape_color">Vape Color: <span> ${
         currentVape.color
       }</span></li>
-      <li class="vapeprop vape_tank">Tank: <span>${caliburnPod.tank}</span></li>
+      <li class="vapeprop vape_tank">Tank: <span>${currentVape.tank}</span></li>
       <li class="vapeprop vape_cartridge_ohms">Ohms: <span> ${
         currentVape.cartridge.ohms
       } ohms</span></li>
@@ -117,7 +127,7 @@ const newVape = (currentVape) => {
       <li class="vapeprop vape_juice_mg">Nicotine: <span> ${
         currentVape.juice.mg
       } mg</span></li>
-      <li class="vape_age">Days since Acquired: <span> ${caliburnPod.vapeAge()} days old</span></li>
+      <li class="vape_age">Days since Acquired: <span> ${currentVape.vapeAge()} days old</span></li>
     </ul>
 `;
   return newArticle;
@@ -127,10 +137,14 @@ const newVape = (currentVape) => {
 const main = document.querySelector(".maincontent");
 const header = document.querySelector(".siteheader");
 
-/*invokes the main append function containing the newVape method
+function Append(vape, nav) {
+  /*invokes the main append function containing the newVape method
 with the object as a parameter*/
-main.append(newVape(caliburnPod));
+  main.append(vape(caliburnPod));
 
-/* invoke the newNav function as a parameter of the const header
+  /* invoke the newNav function as a parameter of the const header
 append function */
-header.append(newNav());
+  header.append(nav());
+}
+
+Append(newVape, newNav);
