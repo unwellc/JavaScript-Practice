@@ -63,8 +63,9 @@ console.log(
   iPhone13ProMax.daysBoughtSinceRelease()
 );
 
-// creates a constant function expression for the navigation menu
-const newNav = function () {
+/* creates a constant function expression for the navigation menu
+using arrow function */
+const newNav = () => {
   //creates a nav element
   const headerNav = document.createElement("nav");
   //add a class name for the nav element to reference the css script
@@ -82,8 +83,9 @@ const newNav = function () {
   return headerNav;
 };
 
-// create a constant function expression for printing vape contents
-const newVape = function (currentVape) {
+/* create a constant function expression for printing vape contents
+using arrow function */
+const newVape = (currentVape) => {
   //creates a new element for article
   const newArticle = document.createElement("article");
   //add classes and attributes to article element
