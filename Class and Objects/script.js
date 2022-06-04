@@ -10,27 +10,8 @@
 
 //Create and Define Vape and Phone object based from Vape and Phone class
 
-import Vape from "./vape.js";
-import Phone from "./phone.js";
-
-const caliburnPod = new Vape(
-  "Caliburn",
-  "Pod",
-  "Gun Metal",
-  false,
-  true,
-  "Cartridge",
-  0.9,
-  15,
-  true,
-  24,
-  60,
-  40,
-  "Salt Nic",
-  true,
-  "May 1, 2022 15:00:00 PST",
-  "../assets_other/images/uwell_caliburn_black_1604833997_f0b649c7.jpg"
-);
+import Phone from "./components/phone.js";
+import vapeObjectArray from "./components/vape_data.js";
 
 const iPhone13ProMax = new Phone(
   "iPhone",
@@ -72,26 +53,27 @@ const newNav = () => {
 };
 
 //create a new function for figure element
-const newImage = (img) => {
+const newImage = (img, caption) => {
   const vapeImage = document.createElement("figure");
   vapeImage.classList.add("vape_image");
   vapeImage.innerHTML = `
   <img src=${img} alt="" />
-  <figcaption><center> Caliburn Uwell A1 </center></figcaption>
+  <figcaption><center> ${caption} </center></figcaption>
   </figure>`;
   return vapeImage;
 };
 
-/* create a constant function expression for printing vape contents
-using arrow function */
-const newVape = (currentVape) => {
+/* maps the vapeObjectArray and output the contents to newVape constant.
+The currentVape parameters represents the array element so it will contain
+one vape object at a time while mapping throughout the array*/
+const newVape = vapeObjectArray.map((currentVape) => {
   //creates a new element for article
   const newArticle = document.createElement("article");
   //add classes and attributes to article element
   newArticle.classList.add("vape");
   newArticle.setAttribute("id", "pod");
   //appends the figure element to the article element
-  newArticle.append(newImage(currentVape.image));
+  newArticle.append(newImage(currentVape.image, currentVape.caption));
   //adds other HTML contents below using template literals
   newArticle.innerHTML += `
     <h1 class="vape_brand">${currentVape.brand}</h1>
@@ -121,21 +103,24 @@ const newVape = (currentVape) => {
       }</span></li>
     </ul>
 `;
+  // returns the vape object contents in article element to the newVape array
   return newArticle;
-};
+});
 
 //creates variables targeting the main and header elements from HTML
 const main = document.querySelector(".maincontent");
 const header = document.querySelector(".siteheader");
 
+//creates a function for appending article and nav contents to HTML file
 function Append(vape, nav) {
-  /*invokes the main append function containing the newVape method
-with the object as a parameter*/
-  main.append(vape(caliburnPod));
-
+  //append the vape contents inside the main for each object found in the array
+  vape.forEach((currentVape) => {
+    main.append(currentVape);
+  });
   /* invoke the newNav function as a parameter of the const header
 append function */
   header.append(nav());
 }
 
+//calls the append function
 Append(newVape, newNav);
