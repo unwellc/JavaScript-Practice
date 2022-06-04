@@ -7,6 +7,7 @@ class Vape {
     // Defines parameters:
     brand,
     vapeType,
+    color,
     battIsRemovable,
     mouthSensor,
     tank,
@@ -18,11 +19,14 @@ class Vape {
     pg,
     juiceType,
     HasBattery,
-    dateAcquired
+    dateAcquired,
+    image,
+    caption
   ) {
     // Define properties:
     this.brand = brand;
     this.vapeType = vapeType;
+    this.color = color;
     this.battIsRemovable = battIsRemovable;
     this.mouthSensor = mouthSensor;
     this.tank = tank;
@@ -39,6 +43,8 @@ class Vape {
     };
     this.HasBattery = HasBattery;
     this.dateAcquired = dateAcquired;
+    this.image = image;
+    this.caption = caption;
   }
   // Add methods like normal functions:
   canVape(BatteryStatus) {
@@ -48,7 +54,7 @@ class Vape {
     this.juice.mg = newJuiceMg;
   }
   vapeAge() {
-    let now = new Date();
+    let now = new Date(); //defines the now property using the built-in Date object
     let acquired = new Date(this.dateAcquired);
     let elapsed = now - acquired; // elapsed time in milliseconds
     let daysSinceAcquired = Math.floor(elapsed / (1000 * 3600 * 24));
