@@ -1,18 +1,10 @@
-/**
- * Practice: Building objects
- *
- * - Create JavaScript objects based on objects in your current environment.
- * - Give each object an identifiable name.
- * - Create properties to describe the objects and set their values.
- * - Find an object that has another object inside of it to create a nested object.
- * - Test your objects in the browser console by accessing the entire object and its specific properties.
- */
+// Defines the object properties, output its contents, and do some methods
 
-//Create and Define Vape and Phone object based from Vape and Phone class
-
+// imports the object constructor class script
 import Phone from "./components/phone.js";
 import vapeObjectArray from "./components/vape_data.js";
 
+// define values for the object properties
 const iPhone13ProMax = new Phone(
   "iPhone",
   "Blue",
@@ -31,6 +23,39 @@ console.log(
   "How many days since you bought it from the release date: ",
   iPhone13ProMax.daysBoughtSinceRelease()
 );
+
+/* Creates a form for an object property array
+and adds event listener to update property values
+upon submit */
+const newForms = (vapePropertyArray) => {
+  // do the function for each list elements found on the parameter
+  vapePropertyArray.forEach((listElement) => {
+    // gets the content of the data type of a list element
+    let data = listElement.getAttribute("data-type");
+    // creates a form element and populate it.
+    const dataForm = document.createElement("form");
+    dataForm.classList.add(`${data}_type`);
+    dataForm.innerHTML = `
+    <input name="${data}" placeholder="New ${data}">
+    <button>Update</button>
+  `;
+
+    // adds an event listener to the form constant
+    dataForm.addEventListener("submit", (event) => {
+      // prevents page reload upon submit
+      event.preventDefault();
+      // assign the submitted value found on input element by query selector to a let
+      let newValue = dataForm.querySelector("input").value;
+      // update the data of the current list element
+      listElement.querySelector("span").innerHTML = `${newValue}`;
+      // reset the text box to blank
+      dataForm.querySelector("input").value = "";
+    });
+
+    //appends the form element to the current list element
+    listElement.append(dataForm);
+  });
+};
 
 /* creates a constant function expression for the navigation menu
 using arrow function */
@@ -68,7 +93,7 @@ The currentVape parameters represents the array element so it will contain
 one vape object at a time while mapping throughout the array*/
 const newVape = vapeObjectArray.map((currentVape) => {
   //creates a new element for article
-  const newArticle = document.createElement("article");
+  let newArticle = document.createElement("article");
   //add classes and attributes to article element
   newArticle.classList.add("vape");
   newArticle.setAttribute("id", "pod");
@@ -91,18 +116,29 @@ const newVape = vapeObjectArray.map((currentVape) => {
       <li class="vapeprop vape_cartridge_wattage">Wattage: <span> ${
         currentVape.cartridge.wattage
       } watts</span></li>
-      <li class="vapeprop vape_juice_type">Juice Type: <span> ${
+      <li class="vapeprop vape_juice_specs" data-type="type">Juice Type: <span> ${
         currentVape.juice.juiceType
-      }</span></li>
-      <li class="vapeprop vape_juice_mg">Nicotine: <span> ${
+      } </span></li>
+      <li class="vapeprop vape_juice_specs" data-type="mg">Nicotine: <span> ${
         currentVape.juice.mg
       } mg</span></li>
+      <li class="vapeprop vape_juice_specs" data-type="vg">VG: <span> ${
+        currentVape.juice.vg
+      } </span></li>
+      <li class="vapeprop vape_juice_specs" data-type="pg">PG: <span> ${
+        currentVape.juice.pg
+      } </span></li>
       <li class="vape_age">Days since Acquired: <span> ${currentVape.vapeAge()} days old</span></li>
       <li class="vape_age">Battery Status: <span> ${
         currentVape.HasBattery ? "Has Battery" : "Low Battery"
       }</span></li>
     </ul>
 `;
+  // creates an array of list to be passed as argument to the form function
+  let newSpecForms = newArticle.querySelectorAll(".vape_juice_specs");
+  console.log(newSpecForms);
+  // call the form function
+  newForms(newSpecForms);
   // returns the vape object contents in article element to the newVape array
   return newArticle;
 });
